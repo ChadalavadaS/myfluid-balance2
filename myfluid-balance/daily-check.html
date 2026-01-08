@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Daily Fluid Check</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    details {
+      margin-top: 0.5rem;
+      font-size: 0.9rem;
+    }
+    summary {
+      cursor: pointer;
+      color: #4f7f6b;
+    }
+    .result {
+      margin-top: 1.5rem;
+      padding: 1rem;
+      border-radius: 10px;
+    }
+    .green { background-color: #e6f4ec; }
+    .amber { background-color: #fff4e0; }
+    .red { background-color: #fbe4e4; }
+    select { margin-top: 0.25rem; margin-bottom:0.5rem; width:100%; padding:0.3rem; }
+    button.button {
+      display:inline-block;
+      margin-top:1rem;
+      background-color:#4f7f6b;
+      color:white;
+      padding:0.5rem 1rem;
+      text-decoration:none;
+      border-radius:8px;
+      border:none;
+      cursor:pointer;
+      font-size:1rem;
+    }
+    button.button:hover { background-color:#3e6655; }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>🟢 Daily Fluid Check</h1>
+  <p>A quick check to help you understand how you are today</p>
+</header>
+
+<main class="card" style="margin:1.5rem auto; max-width:600px;">
+
+<form id="checkForm">
+
+  <!-- Weight -->
+  <h3>⚖️ Today’s weight</h3>
+  <label>
+    Compared to your usual (dry) weight, is your weight today:
+    <select id="weightChange" required>
+      <option value="">Select</option>
+      <option value="same">🟢 About the same</option>
+      <option value="up1">🟠 Up 3–4 kg</option>
+      <option value="up2">🔴 More than 5 kg</option>
+    </select>
+  </label>
+
+  <details>
+    <summary>ⓘ How to check your weight</summary>
+    Weigh yourself <strong>first thing in the morning</strong>, after using the toilet and before eating or drinking.
+    Use the same scales on a hard floor if possible.
+  </details>
+
+  <hr>
+
+  <!-- Swelling -->
+  <h3>🦵 Swelling</h3>
+  <label>
+    Have you noticed swelling in your legs, ankles, feet, or abdomen?
+    <select id="swelling" required>
+      <option value="">Select</option>
+      <option value="no">🟢 No swelling</option>
+      <option value="mild">🟠 Mild swelling</option>
+      <option value="yes">🔴 Significant swelling</option>
+    </select>
+  </label>
+
+  <details>
+    <summary>ⓘ How to check for swelling</summary>
+    Press your thumb firmly over the shin or ankle for <strong>5 seconds</strong>, then release.
+    If a dent remains for several seconds, this may suggest fluid-related swelling.
+  </details>
+
+  <hr>
+
+  <!-- Breathlessness -->
+  <h3>😮‍💨 Breathing</h3>
+  <label>
+    How is your breathing today?
+    <select id="breathlessness" required>
+      <option value="">Select</option>
+      <option value="normal">🟢 No more breathless than usual</option>
+      <option value="exertion">🟠 More breathless on exertion</option>
+      <option value="rest">🔴 Breathless at rest or when lying flat</option>
+    </select>
+  </label>
+
+  <details>
+    <summary>ⓘ How to judge your breathing</summary>
+    Think about what you can usually do comfortably. New breathlessness at rest,
+    when talking, or when lying flat is more concerning.
+  </details>
+
+  <button type="submit" class="button">Check my symptoms</button>
+</form>
+
+  <div id="result"></div>
+
+</main>
+
+<script>
+document.getElementById("checkForm").addEventListener("submit", function(e) {
+  e.preventDefault();
+
+  const weight = document.getElementById("weightChange").value;
+  const swelling = document.getElementById("swelling").value;
+  const breath = document.getElementById("breathlessness").value;
+  const result = document.getElementById("result");
+
+  let zone = "green";
+
+  // Logic: Red = severe
+  if (weight === "up2" || breath === "rest" || swelling === "yes") {
+    zone = "red";
+  } 
+  // Amber = early changes
+  else if (weight === "up1" || breath === "exertion" || swelling === "mild") {
+    zone = "amber";
+  }
+
+  // Display results with Back to Home button
+  if (zone === "green") {
+    result.innerHTML = `
+      <div class="result green">
+        <h3>🟢 Green – stable</h3>
+        <p>Your symptoms appear stable today.</p>
+        <p>Continue your usual medicines and daily monitoring.</p>
+        <a href="home.html" class="button">Back to Home</a>
+      </div>`;
+  }
+
+  if (zone === "amber") {
+    result.innerHTML = `
+      <div class="result amber">
+        <h3>🟠 Amber – early changes</h3>
+        <p>You may be developing early signs of fluid build-up.</p>
+        <ul>
+          <li>⚖️ Weight up 3–4 kg over a few days</li>
+          <li>🦵 Mild swelling</li>
+          <li>😮‍💨 Breathless on exertion</li>
+          <li>Consider contacting your heart failure team in the next 24–48 hours</li>
+          <li>Monitor symptoms more frequently</li>
+          <li>💊 You may be advised by your healthcare team to increase your diuretic (“water tablet”), such as furosemide or bumetanide, e.g., an extra tablet in the morning if you notice weight gain, swelling, and breathlessness. Only adjust if instructed by your team.</li>
+        </ul>
+        <a href="home.html" class="button">Back to Home</a>
+      </div>`;
+  }
+
+  if (zone === "red") {
+    result.innerHTML = `
+      <div class="result red">
+        <h3>🔴 Red – urgent change</h3>
+        <p>Your answers suggest a significant change in your symptoms.</p>
+        <ul>
+          <li>⚖️ Weight gain >5 kg over a few days</li>
+          <li>🦵 Significant swelling</li>
+          <li>😮‍💨 Breathless at rest or lying flat</li>
+          <li>Contact your heart failure team urgently today</li>
+          <li>If severe symptoms or rapid worsening → call 999 immediately</li>
+        </ul>
+        <a href="home.html" class="button">Back to Home</a>
+      </div>`;
+  }
+
+});
+</script>
+
+</body>
+</html>
+
