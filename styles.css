@@ -143,3 +143,11 @@ details p {
   font-size: 0.95rem;
 }
 
+.draft-banner {
+  background-color: #fff4e5;
+  color: #5a3e00;
+  padding: 0.6rem 1rem;
+  text-align: center;
+  font-size: 0.9rem;
+  border-bottom: 1px solid #f0d9b5;
+}
