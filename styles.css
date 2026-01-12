@@ -1,0 +1,145 @@
+/* ------------------ General Body Styles ------------------ */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #fdf8f2;
+  margin: 0;
+  padding: 0;
+  color: #333;
+  line-height: 1.5;
+}
+
+/* ------------------ Header / Welcome Section ------------------ */
+header.welcome {
+  text-align: center;
+  padding: 2rem 1rem;
+  background-color: #fff9f2;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  border-bottom: 1px solid #eee;
+}
+
+header.welcome h1 {
+  margin-bottom: 0.5rem;
+  color: #4CAF50;
+}
+
+header.welcome p {
+  max-width: 700px;
+  margin: 0 auto;
+  font-size: 1rem;
+}
+
+/* ------------------ Panels Container ------------------ */
+.panels-container {
+  display: flex;
+  flex-direction: column; /* stacked panels */
+  gap: 1rem;
+  max-width: 700px;
+  margin: 1.5rem auto;
+  padding: 0 1rem;
+}
+
+/* Individual Panel Styling */
+.panel {
+  background-color: #fff9f2;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  padding: 1.5rem;
+  text-align: center;
+  transition: transform 0.2s;
+}
+
+.panel:hover {
+  transform: translateY(-3px);
+}
+
+/* Equipment Panel Styling */
+.panel ul {
+  text-align: left;
+  padding-left: 1.2rem;
+  margin-bottom: 0;
+}
+
+/* Small text for notes */
+.small-text {
+  font-size: 0.85rem;
+  color: #555;
+  margin-top: 0.5rem;
+}
+
+/* Buttons Styling */
+.panel .button, .questionnaire-panel .button {
+  display: inline-block;
+  margin-top: 0.8rem;
+  padding: 0.5rem 1rem;
+  background-color: #4CAF50;
+  color: white;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background-color 0.2s;
+}
+
+.panel .button:hover, .questionnaire-panel .button:hover {
+  background-color: #45a049;
+}
+
+/* Questionnaire Panel Styling */
+.questionnaire-panel {
+  margin-top: 2rem;
+  text-align: center;
+  background-color: #fff9f2;
+  border-radius: 12px;
+  padding: 1.5rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+/* About the Creator Section */
+.about-creator {
+  max-width: 700px;
+  margin: 2rem auto 3rem auto;
+  padding: 1rem 1.5rem;
+  background-color: #fff9f2;
+  border-radius: 12px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  text-align: center;
+  font-size: 0.95rem;
+  color: #333;
+}
+
+/* Accordion (pop-down) styling */
+details {
+  background-color: #ffffff;
+  border-radius: 8px;
+  padding: 0.6rem 0.8rem;
+  margin: 0.7rem 0;
+  text-align: left;
+  cursor: pointer;
+}
+
+details summary {
+  font-weight: bold;
+  cursor: pointer;
+}
+
+details summary::-webkit-details-marker {
+  display: none;
+}
+
+details summary::after {
+  content: " ▼";
+  font-size: 0.9rem;
+  color: #4CAF50;
+}
+
+details[open] summary::after {
+  content: " ▲";
+}
+
+details p {
+  margin-top: 0.5rem;
+  font-size: 0.95rem;
+}
+
